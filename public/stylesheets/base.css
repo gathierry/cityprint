@@ -1,0 +1,229 @@
+@charset "utf-8";
+
+:link,:visited { text-decoration:none }
+ul,ol { list-style:none }
+h1,h2,h3,h4,h5,h6,pre,code { font-size:1em; }
+a img,:link img,:visited img { border:none }
+address { font-style:normal }
+body, html, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5 ,h6, pre, form, fieldset, input, p, blockquote, th, td,button, table,tr,tbody,textarea
+{ margin:0; padding:0;outline:none;}
+ul,ol { list-style:none;}
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+fieldset, img {border:0;}
+caption, th {text-align:left;}
+q:before, q:after {content:'';}
+body {-webkit-tap-highlight-color: transparent;display: block;}
+div {display: block;}
+textarea{resize:none;}
+html {word-break:break-all;}
+
+.un{display:none;}
+.on{display:block;}
+.clear{clear:both;}
+.not-selectable{
+    -webkit-user-select: none;
+    -o-user-select:none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.person-color{
+	background: -webkit-gradient(linear, 73% 100%, 50% 0%, from(rgba(134, 186, 84, .9)), to(rgba(134, 186, 84, .70)));
+	background: -moz-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+	background: -o-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+	background: #86BA54\9;
+	background: -ms-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+}
+.group-color-0{
+	background: -webkit-gradient(linear, 73% 100%, 50% 0%, from(rgba(67, 139, 187, .82)), to(rgba(67, 139, 187, .6)));
+	background: -moz-linear-gradient(bottom, rgba(67, 139, 187, .82), rgba(67, 139, 187, .6));
+	background: -o-linear-gradient(bottom, rgba(67, 139, 187, .82), rgba(67, 139, 187, .6));
+	background: #7AADCF\9;
+	background: -ms-linear-gradient(bottom, rgba(67, 139, 187, .82), rgba(67, 139, 187, .6)); 
+	/* background:url(img/2.png) 0 0 no-repeat;
+	background-size:cover; */
+}
+
+.group-color-1{
+	background: -webkit-gradient(linear, 73% 100%, 50% 0%, from(rgba(134, 186, 84, .9)), to(rgba(134, 186, 84, .70)));
+	background: -moz-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+	background: -o-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+	background: #86BA54\9;
+	background: -ms-linear-gradient(bottom, rgba(134, 186, 84, .9), rgba(134, 186, 84, .70));
+}
+
+.group-color-2{
+	background:rgb(246,79,109);
+}
+
+.group-color-3{
+	background:rgb(255,190,50);
+}
+
+.small-screen #main-header{ height:100px; }
+.normal-screen #main-header{ height:120px; }
+.large-screen #main-header{ height:140px; }
+.small-screen .logo{ top:25px; }
+.normal-screen .logo{ top:35px; }
+.large-screen .logo{ top:45px; }
+
+.logo {
+    position:absolute;
+    left:20%;
+    margin-left:-80px;
+    height:41px;
+    width:205px;
+    background: url(/bundles/colormain/images/logo.png) no-repeat;
+    cursor:pointer;
+}
+
+h1,h2,h3,h4,h5,h6,p,input,div,button,span,a,ul,li,form,table,textarea,select{font-family:helvetica,Arial,"微软雅黑","Microsoft Yahei","hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;}
+h3{font-size:22px;line-height:28px;font-weight:normal}
+h4{font-size:18px;line-height:30px;font-weight:normal}
+h5{font-size:16px;font-weight:normal}
+h6{font-size:14px;font-weight:normal}
+
+/*ie下滚动时防止振动*/
+* html{
+	background-image: url(about:blank);
+	background-attachment: fixed; 
+}
+
+*+html{/* 只有IE6支持 */
+	background-image: url(about:blank); 
+	background-attachment: fixed;
+}
+
+/*解决单元格内容为空时，无法显示单元格边框的问题*/ 
+table {  
+    border-collapse: collapse;  
+}  
+
+
+
+.tabletd1{
+	width:140px;
+	height:40px;
+	border-bottom:1px solid #000;
+	border-top:1px solid #000;
+	text-align:center;
+}
+
+.tabletd2{
+	height:150px;
+	text-align:center;
+	border-bottom:1px solid #000;
+}
+
+.tabletd3{
+	height:120px;
+	border-bottom:1px solid #000;
+	text-align:center;
+	vertical-align:top;
+}
+
+.tabletda{
+	width:120px;
+	background:#EEE;
+	font: 14px/40px "Microsoft Yahei";
+	vertical-align:top;
+}
+
+.tabletdb{
+	border-left:1px solid #000;
+}
+.ft10 {
+	font-size: 10px;
+}
+.ft12 {
+	font-size: 12px;
+}
+
+.ft-s-s {
+
+	font-size: 10px;
+}
+
+.ft-s-m-s {
+
+	font-size: 11px;
+}
+.ft-s-m {
+
+	font-size: 12px;
+}
+
+.ft-s-l {
+
+	font-size: 13px;
+}
+
+.ft-m-s {
+	font-size: 14px;
+}
+.ft-m-m {
+	font-size: 15px;
+}
+.ft-m-l {
+
+	font-size: 16px;
+}
+
+/*attention-bar*/
+.attention-bar{
+	position: fixed;
+	width: 360px;
+	height: 20px;
+	top: 30px;
+	left: 50%;
+	margin-left: -200px;
+	padding: 7px 20px;
+	
+	color: white;
+	font-size: 12px;
+	line-height: 20px;
+	
+	background: rgba(67,67,67,.9);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6434343, endColorstr=#E6434343);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6434343, endColorstr=#E6434343)";
+    
+	-webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+	
+	-webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -o-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+	
+	-webkit-transition: -webkit-transform .5s ease;
+    -moz-transition: -moz-transform .5s ease;
+    -ms-transition: -ms-transform .5s ease;
+    -o-transition: -o-transform .5s ease;
+    transition: transform .5s ease;
+	
+	z-index:9999;
+}
+
+.attention-bar-hide{
+    -webkit-transform: translateY(-100%) rotateX(90deg);
+    -moz-transform: translateY(-100%) rotateX(90deg);
+    -ms-transform: translateY(-100%) rotateX(90deg);
+    -o-transform: translateY(-100%) rotateX(90deg);
+    transform: translateY(-100%) rotateX(90deg);
+}
