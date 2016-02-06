@@ -1,4 +1,7 @@
+User = require('../models/user.js');
+
 var express = require('express');
+var crypto = require("crypto");
 var router = express.Router();
 
 /* GET home page. */
@@ -22,6 +25,25 @@ router.post('/login', function(req, res, next) {
 	// write to db
 	req.session.user = req.body.username;
 	return res.redirect('/');
+});
+
+router.get('/reg', function(req, res, next) {
+	res.render('login', { title: 'Login' });
+});
+
+router.post('/reg', function(req, res, next) {
+    var username = "testuser5";
+	var md5 = crypto.createHash('md5');
+	var password = md5.update("00000000").digest('base64');
+	var newUser = new User(username, password);
+	newUser.save(function(err) {
+	    if (err) {
+			throw(err);
+	    	return res.redirect('/reg');
+	    }
+		req.session.user = username;
+		res.redirect('/');
+	});
 });
 
 router.get('/logout', function(req, res, next) {
