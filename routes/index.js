@@ -18,17 +18,30 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-	// if log in
-	// verify in db
+    var username = "testuser5";
+	var md5 = crypto.createHash('md5');
+	var password = md5.update("00000000").digest('base64');
+	User.get(username, function(err, user) {
+	    if (err) {
+			throw(err);
+	    	return res.redirect('/login');
+	    }
+		if (!user) {
+			console.log('User not exist');
+			return res.redirect('/login');
+		}
+		if (user.password != password) {
+			console.log('Wrong password');
+			return res.redirect('/login');
+		}
+		req.session.user = username;
+		return res.redirect('/');
+	})
 	
-	// if register
-	// write to db
-	req.session.user = req.body.username;
-	return res.redirect('/');
 });
 
 router.get('/reg', function(req, res, next) {
-	res.render('login', { title: 'Login' });
+	res.render('login', { title: 'Register' });
 });
 
 router.post('/reg', function(req, res, next) {
