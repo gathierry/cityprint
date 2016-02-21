@@ -1,292 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link href="base.css" type="text/css" rel="stylesheet" >
-		<link href="account.css" type="text/css" rel="stylesheet"/>
-        <title>Sign in-Colorwork</title>
-        <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js" type="text/javascript"></script>
-		<script charset="utf-8" src="meow.js" type="text/javascript"></script>
-		<script>var dic = { 'login':'Sign in',
-			'register':'Sign up',
-			'registerColorwork':'Register Colorwork',
-			'goRegisterColorwork':'Sign up',
-			'pleaseWait':'Please wait',
-			'submit':'Submit',
-			'noEmail':'Please enter your email account',
-			'wrongEmail':'Please enter correct email account',
-			'noNewPassword':'Please enter new password',
-			'wrongPasswordLength':'Password must contain between 6 to 16 characters',
-			'inconsistantPassword':'Passwords do not correspond',
-			'notExistEmail':'The email address has not been signed up, ',
-			'wrongVericode':'Validation code is incorrect',
-			'changeVericode':'Cannot See?',
-			'pleaseEnterVericode':'Please enter validation code',
-			'emailSend':'Reset link has been sent to your email. Redirecting..',
-			'passwordResetSuccess':'Password reset successfully',
-			'passwordResetFailed':'Password reset failed',
-			'alreadyUsedEmail':'The email has been signed up, ',
-			'pleaseRefresh':'Please refresh web page',
-			'mismatchPassword':'Email or password is incorrect',
-			'emptyName':'Must fill in your name',
-			'emptyCellphone':'Must fill in your cell number',
-			'noPassword':'Please enter password',
-			'noConfirmPassword':'Please enter password again',
-			'avatarSaveSuccess':'Profile photo saved',
-			'useAlreadyExist':'User is existed',
-			'unknownError':'Unknown error',
-			'memoEditFailed':'Edit failure',
-			'messageShared':'Shared',
-			'emptyMessage':'Can not share empty message',
-			'messageTooLong':'Over the length limit, the maximum number of characters is ',
-			'messageCommentAt':'Reply@',
-			'messageDeleteSuccess':'Successfully delete message',
-			'commentDeleteSuccess':'Successfully delete comment',
-			'messageDeleteFailed':'Fail to delete message ',
-			'commentDeleteFailed':'Fail to delete comment',
-			'messageSendFailed':'Fail to send message',
-			'commentSendFailed':'Fail to send comment',
-			'fileAll':'All',
-			'fileGroupShared':'Group shared documents',
-			'imageTitle':'Photos',
-			'imageGroupShared':'Group shared photos',
-			'imageOpen':'Open',
-			'fileUploaded':'Upload',
-			'logoutFailed':'Failed to logout',
-			'statContentInput':'Heading',
-			'statEmptyTitle':'Must fill in the topic',
-			'statEmptyContent':'Please fill in the contents',
-			'statCreateFailed':'Create faliure',
-			'statFillSuccess':'Fill in stat query successfully',
-			'statFillFailed':'Submit failure',
-			'statDeleteSuccess':'Successfully delete stat query',
-			'statWaitingUrl':'Connecting to the web link, please wait...',
-			'statContentTime':'Time',
-			'statContentVote':'Option',
-			'statResultDeleteSuccess':'Delete successfully',
-			'statResultEditSuccess':'Edit successfully',
-			'taskDelete':'Delete',
-			'taskDeleteFailed':'Delete task failure',
-			'taskUnassigned':'unassign',
-			'gameHP':'game.HP',
-			'gameScore':'game.score',
-			'gameFaultOnce':'game.fault.once',
-			'gameFaultTwice':'game.fault.twice',
-			'gameFaultThird':'game.fault.third',
-			'gameFaultFourth':'game.fault.fourth',
-			'gameDead':'game.dead',
-			'messageLoadMore':'Show More',
-			'fileDownload':'Download',
-			'remove':'Delete',
-			'fileDownloadFailed':'Fail to download document',
-			'imageDownloadFailed':'Fail to download photo',
-			'nameTooLong':'Fail to edit, name over maximum number of characters',
-			'noAuthority':'Sorry, you are not authorized',
-			'duplicateName':'Fail to rename, name has existed',
-			'pleaseLoginAgain':'Time is out, please sign in again after we direct you to the sign in page',
-			'deleteSuccess':'Delete successfully',
-			'uploading':'Uploading',
-			'wrongFileType':'Choose document in jpg,jped,png,gif,bmp format',
-			'changeSuccess':'Edit successfully',
-			'fileTitle':'Document',
-			'dragToUpload':'Drag in to upload',
-			'dragToCategorize':'Select document to the correspond project for filing purpose',
-			'dragToCategorizeImage':'Select image to the correspond project for filing purpose',
-			'inviteTooMuch':'Maximum invitations at once is 300',
-			'messageTitle':'News Feed',
-			'groupEventAdd':'Add New Project',
-			'emptyEvent':'Can not create empty project',
-			'existEvent':'Can not create duplicate project',
-			'confirmDeleteEvent':'Are you sure to delete this project permanently?',
-			'deleteEventSuccess':'Delete project successfully',
-			'uploadContinue':'Continue to upload',
-			'fileUploadSuccess':'Upload successfully, save at Document',
-			'imageUploadSuccess':'Upload successfully, save at Photo',
-			'uploadSuccess':'Upload successfully!',
-			'groupInfoChangeSuccess':'Group description update successfully',
-			'groupInfoChangeNoAuthority':'Fail to update group description, not authorized',
-			'groupRenameSuccess':'Rename group successfully',
-			'inviteNone':'Please insert email accout for invitation',
-			'groupMemberNumber':' members',
-			'uploadFailed':'Upload Failure!',
-			'changeFailed':'Update Failure！',
-			'memberDeleteSuccess':'Delete group member successfully',
-			'noMoreAdministrator':'You are the sole administrator, can not be removed',
-			'setAdministrator':'Set as Admin',
-			'groupAdministrator':'Administrator',
-			'cancelAdministrator':'Remove Admin',
-			'setAdministratorSuccess':'Set as administrator successfully',
-			'cancelAdministratorSuccess':'Remove as administrator successfully',
-			'inviteSuccessSendMail':'Invite successfully, email sent',
-			'mailUnit':'',
-			'inviteExistUser':'Some users already existed, email sent',
-			'quitGroupSuccess':'Quit group successfully',
-			'quitGroupFailed':'Fail to quit group',
-			'messageRelateToMe':'Related to me',
-			'groupDeleteSuccess':'Delete group successfully',
-			'groupDeleteFailed':'Fail to delete group',
-			'groupFold':'Retract',
-			'groupComment':'Reply',
-			'messageJustSend':'Latest',
-			'messageSend':'Send',
-			'fileUploader':'Upload by ',
-			'newMessage':'New Message',
-			'settingEmailOn':'On',
-			'settingEmailOff':'Off',
-			'settingOriginPwdWrong':'Original password is wrong',
-			
-			'calendar.January':'January',
-			'calendar.February':'February',
-			'calendar.March':'March',
-			'calendar.April':'April',
-			'calendar.May':'May',
-			'calendar.June':'June',
-			'calendar.July':'July',
-			'calendar.August':'August',
-			'calendar.September':'September',
-			'calendar.October':'October',
-			'calendar.November':'November',
-			'calendar.December':'December',
-				
-			'calendar.Jan':'Jan',
-			'calendar.Feb':'Feb',
-			'calendar.Mar':'Mar',
-			'calendar.Apr':'Apr',
-			'calendar.May':'May',
-			'calendar.Jun':'Jun',
-			'calendar.Jul':'Jul',
-			'calendar.Aug':'Aug',
-			'calendar.Sep':'Sep',
-			'calendar.Oct':'Oct',
-			'calendar.Nov':'Nov',
-			'calendar.Dec':'Dec',
-			
-			'calendar.Sunday':'Sunday',
-			'calendar.Monday':'Monday',
-			'calendar.Tuesday':'Tuesday',
-			'calendar.Wednesday':'Wednesday',
-			'calendar.Thursday':'Thursday',
-			'calendar.Friday':'Friday',
-			'calendar.Saturday':'Saturday',
-			
-			'calendar.Sun':'Sun',
-			'calendar.Mon':'Mon',
-			'calendar.Tue':'Tue',
-			'calendar.Wed':'Wed',
-			'calendar.Thu':'Thu',
-			'calendar.Fri':'Fri',
-			'calendar.Sat':'Sat',
-			
-			'calendar.today':'today',
-			'calendar.month':'month',
-			'calendar.week':'week',
-			'calendar.day':'day'
-		}; </script>
-        <script charset="utf-8" src="loginRegister.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <div id="login" class="hide" >
-            <div id="main-header">
-				<div class="logo" onclick="window.location='./'"></div>
-			</div>
-            <div id="main-container">
-    <div class="register-box" id="register-box">
-        <div class="input-box">
-            <input type="text" id="register-name" class="text-input" autocomplete="off" tabindex="1" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()">
-            <label for="register-name" class="placeholder">Name</label>
+<!DOCTYPE html>
+<html>
+  <head> 
+    <meta charset="UTF-8"/>
+    <title> Sign in - CityPrint </title>
+    <link rel="stylesheet" type="text/css" href="Cityprint.css"/> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="loginRegister.js"></script>
+  </head>
+  <body>
+    <div id="login" class="hide">
+      <div id="main-head">
+        <div class="logo" onclick="window.location='./Cityprint.html'"></div>
+      </div>
+      <div id="main-body">
+        <div id="register-box" class="register-box">
+          <div class="input-box">
+            <input type="text" id="register-username" class="text-input" placeholder="Username" tabindex="1" onchange="checkUsernameExist()"/>
+          </div>
+          <div class="input-box">
+            <input type="password" id="register-password" class="text-input" placeholder="Password" tabindex="2"/>
+          </div>
+          <div class="input-box">
+            <input type="password" id="register-password-confirm" class="text-input" placeholder="Confirm Password" tabindex="3"/>
+          </div>
+          <div class="login-bind">
+            <button id="register-btn" class="btn" tabindex="4" onclick="submitRegister()">Sign up</button>
+          </div>
+          <div id="register-information" class="information information-hide hide">
+          </div>
         </div>
-        <div class="input-box">
-            <input type="text" id="register-email" class="text-input" autocomplete="off" tabindex="2" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()" onchange="checkEmailExist()">
-            <label for="register-email" class="placeholder">Email</label>
+        <div id="login-box" class="login-box in-place login-box-before-init">
+          <div class="input-box">
+            <input type="text" id="login-username" class="text-input" placeholder="Username" tabindex="5" onchange="checkUsernameExist()"/>
+          </div>
+          <div class="input-box">
+            <input type="password" id="login-password" class="text-input" placeholder="Password" tabindex="6"/>
+          </div>
+          <div class="login-bind">
+            <button id="login-btn" class="btn" tabindex="7" onclick="submitLogin()">Sign in</button>
+          </div>
+          <div id="login-information" class="information information-hide hide">
+          </div> 
         </div>
-        <div class="input-box">
-            <input type="password" id="register-password" class="text-input" tabindex="3" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()">
-            <label for="register-password" class="placeholder">Password</label>
+        <div id="slogan" class="slogan slogan-in-place not-selectable">
         </div>
-        <div class="input-box">
-            <input type="text" id="register-cellphone" class="text-input" autocomplete="off" tabindex="4" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()">
-            <label for="register-cellphone" class="placeholder">Phone</label>
+        <div id="switcher" class="not-selectable switcher-before-init" onclick="switchLoginRegister()">
+          <div id="switch-arrow" class="switch-arrow"></div>
+          <div id="switch-label">Sign up</div>
         </div>
-        <div class="input-box hide" id="code-box">
-            <input type="text" id="register-code" class="text-input" tabindex="5" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()" onchange="checkCode()">
-            <label for="register-code" class="placeholder">Verification Code</label>
-        </div>
-        <button id="register-btn" class="btn" tabindex="6" onclick="submitRegister()">Sign up</button>
-        <div id="register-attention" class="attention attention-hide hide"></div>
+      </div>
+      <div id="main-footer" class="main-footer">
+        <ul id="website-info">
+			<li>© 2016 CityPrint | </li>
+			<li>Li Shiyu | </li>
+            <li>Zhan Yin  </li>
+		</ul>
+      </div>
     </div>
-    <div class="login-box in-place login-box-before-init" id="login-box">
-        <div class="input-box">
-            <input type="text" id="login-email" class="text-input" autocomplete="off" tabindex="7" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()" onchange="checkEmailExist()">
-            <label for="login-email" class="placeholder">Email</label>
-        </div>
-        <div class="input-box">
-            <input type="password" id="login-password" class="text-input" tabindex="8" onkeydown="hidePlaceholder(this)" onblur="changeBackgroundColor()" onfocus="stopBackgroundColor()">
-            <label for="login-password" class="placeholder">Password</label>
-        </div>
-        <div class="login-bind">
-            <a class="login-bind-weibo" href="https://api.weibo.com/oauth2/authorize?client_id=538614757&amp;redirect_uri=http%3A%2F%2Fwww.colorwork.com%2Faccount%2Fweibo%2Fcallback%2Flogin_register_bind&amp;response_type=code">Weibo</a>
-			<a class="login-bind-renren" href="http://graph.renren.com/oauth/authorize?client_id=2fa880a813c044abbcc4779f69166698&amp;redirect_uri=http%3A%2F%2Fwww.colorwork.com%2Faccount%2Frenren%2Fcallback%2Flogin_register_bind&amp;response_type=code&amp;state=renren_56b4cf7dd99677.59780160&amp;scope=status_update+publish_feed">Renren</a>
-            <button id="login-btn" class="btn" tabindex="10" onclick="submitLogin()">Sign in</button>
-		</div>
-        <div class="remember-forgot">
-            <a class="forgot" onclick="openForgetLink()" href="javascript:void(0)">Forgot Password </a>
-            <label>
-                <input type="checkbox" value="1" id="remember-me" tabindex="9" checked="checked">
-                <span class="remember">Remember me</span>
-            </label>
-        </div>
-        <div id="login-attention" class="attention attention-hide hide"></div>    
-    </div>
-    <div id="slogan-content" class="slogan slogan-in-place not-selectable"></div>
-    <div id="switcher" class="not-selectable switcher-before-init" onclick="switchLoginRegister()"><div id="switch-arrow" class="switch-arrow"></div><div id="switch-label">Sign up</div></div>
-</div>
-				<div id="colorwork-intro">
-		<div id="colorwork-slogan">
-			<img src="/bundles/colormain/images/colorwork-slogan.png?v=2014.3.5">
-			<a class="downloadBtn" id="android" target="_blank" href="http://cstatic.oss.aliyuncs.com/mobile/android/Colorwork_1.0.5.apk">Android</a>
-			<a class="downloadBtn" id="iphone" target="_blank" href="https://itunes.apple.com/hk/app/colorwork-new-way-to-work/id585993965?mt=8">iPhone</a>
-		</div>
-		<div id="colorwork-scene">
-			<div class="scene-viewport">
-				<ul>
-					<li><img src="/bundles/colormain/images/colorwork-scene-club.png?v=2014.3.5"></li>
-					<li><img src="/bundles/colormain/images/colorwork-scene-homework.png?v=2014.3.5"></li>
-					<li><img src="/bundles/colormain/images/colorwork-scene-class.png?v=2014.3.5"></li>
-					<li><img src="/bundles/colormain/images/colorwork-scene-lab.png?v=2014.3.5"></li>
-				</ul>
-			</div>
-			<ul class="scene-nav">
-				<li><a class="nav-active">1</a></li>
-				<li><a>2</a></li>
-				<li><a>3</a></li>
-				<li><a>4</a></li>
-			</ul>
-		</div>
-		<div id="colorwork-function">
-			<img src="/bundles/colormain/images/colorwork-function.png?v=2014.3.5">
-		</div>
-	</div>
-            <div class="footer" id="footer">
-				<div id="locale">
-					<ul id="locale-menu">
-						<li onclick="window.location='?hl=zh_CN'">简体中文</li>
-						<li onclick="window.location='?hl=zh_TW'">繁體中文</li>
-						<li onclick="window.location='?hl=en'">English</li>
-					</ul>
-					<div id="selected-locale" onmouseover="addClass('locale-menu','open');">English<div class="triangle"></div></div>
-				</div>
-				<ul id="website-info">
-					<li>© 2013 colorwork.com | </li>
-					<li>京ICP证12044898号 | </li>
-					<li class="hyperlink" onclick="window.open('help?3');">About Us | </li>
-					<li class="hyperlink"onclick="window.open('faq');">Help | </li>
-					<li class="hyperlink" onclick="window.open('help?1');">Contact Us | </li>
-					<li><a class="help_button" style="color:#ccc" href="/appdownload">apps</a><span style="color:red;position:relative;top:-6px;">new</span></li>
-				</ul>
-			</div>
-        </div>
-		<div style="display:none"><script src="http://v1.cnzz.com/stat.php?id=5647930&web_id=5647930" language="JavaScript"></script></div>
-    </body>
+  </body>
 </html>
-
