@@ -19,13 +19,23 @@ User.prototype.save = function save(callback) {
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + userTable + ' (username VARCHAR(30) PRIMARY KEY, password VARCHAR(30))', function(err) {
 		if (err) {
 			dbConnection.end();
-			return callback(err);
+			return callback(err, null);
 		}
 	});
-	query = dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
-		dbConnection.end();
-		callback(err);
-	});
+	
+	query = dbConnection.query('SELECT * FROM ' + userTable + ' WHERE `username` = ?', username, function (err, results, fields) {
+		if (results.length > 0) { // user already exist
+			var user = new User(results[0].username, results[0].password);
+			dbConnection.end();
+			callback(err, true);
+		}
+		else {
+			dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
+				dbConnection.end();
+				callback(err, false);
+			});
+		}
+    });
 };
 
 User.get = function get(username, callback) {
