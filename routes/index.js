@@ -25,23 +25,23 @@ router.post('/login', function(req, res, next) {
 	User.get(username, function(err, user) {
 	    if (err) {
 			throw(err);
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 	    	return res.redirect('/login');
 	    }
 		if (!user) {
 			jsonResp.errcode = 2;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 			console.log('User not exist');
 		}
 		else if (user.password != password) {
 			jsonResp.errcode = 3;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 			console.log('Wrong password');
 		}
 		else {
 			req.session.user = username;
 			jsonResp.errcode = 0;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 			//return res.redirect('/');
 		}
 	});
@@ -55,14 +55,14 @@ router.get('/checkusername', function(req, res, next) {
 	User.exist(username, function(err, exist) {
 	    if (err) {
 			throw(err);
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 	    }
 		if (!exist) {
 			jsonResp.errcode = 0;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 		} else {
 			jsonResp.errcode = 2;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 		}
 	});
 });
@@ -76,7 +76,7 @@ router.post('/reg', function(req, res, next) {
 	User.exist(username, function(err, exist) {
 	    if (err) {
 			throw(err);
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 	    }
 		if (!exist) {
 			jsonResp.errcode = 0;
@@ -84,14 +84,14 @@ router.post('/reg', function(req, res, next) {
 			newUser.save(function(err) {
 			    if (err) {
 					throw(err);
-			    	res.json(JSON.stringify(jsonResp));
+			    	res.json(jsonResp);
 			    }
 				req.session.user = username;
-				res.json(JSON.stringify(jsonResp));
+				res.json(jsonResp);
 			});
 		} else {
 			jsonResp.errcode = 2;
-			res.json(JSON.stringify(jsonResp));
+			res.json(jsonResp);
 		}
 	});
 });

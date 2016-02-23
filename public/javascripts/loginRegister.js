@@ -10,13 +10,13 @@ var viewWidth = 1002;
 var slogan = "Leave footprint on c".split("");
 var j = 0;
 var dic = { 
-      "alreadyUsedUsername":'The username has been signed up',
+      "alreadyUsedUsername":'The username has been signed up ',
       "goRegisterCityprint":'Sign up',
       "login":'Sign in',
       "mismatchPassword":'Email or password is incorrect',
       "noConfirmPassword":'Please confirm password',
       "noPassword":'Please enter password',
-      "notExistUsername":'The username has not been signed up',
+      "notExistUsername":'The username has not been signed up ',
       "noUsername":'Please enter your username',
       "pleaseWait":'Please wait',
       "register":'Sign up',
@@ -101,7 +101,6 @@ function checkUsernameExist(){
              dataType: "json",
              type: "GET",
              success: function(message){
-				 console.log(message);
                  if(message.errcode == 0 && isLoginBox){
                      showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
                  }
