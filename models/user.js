@@ -15,45 +15,45 @@ User.prototype.save = function save(callback) {
 	var user = {username: this.username,
 	            password: this.password
 	};
-	dbConnection.connect();
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + userTable + ' (username VARCHAR(30) PRIMARY KEY, password VARCHAR(30))', function(err) {
 		if (err) {
-			dbConnection.end();
-			return callback(err, null);
+			return callback(err);
 		}
 	});
-	
-	query = dbConnection.query('SELECT * FROM ' + userTable + ' WHERE `username` = ?', username, function (err, results, fields) {
-		if (results.length > 0) { // user already exist
-			var user = new User(results[0].username, results[0].password);
-			dbConnection.end();
-			callback(err, true);
+	query = dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
+		if (err) {
+			return callback(err);
+		} else {
+			callback(err);
 		}
-		else {
-			dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
-				dbConnection.end();
-				callback(err, false);
-			});
-		}
-    });
+	});
 };
+
+User.exist = function exist(username, callback) {
+	var query = dbConnection.query('SELECT COUNT(*) FROM ' + userTable + ' WHERE `username` = ?', username, function(err, results) {
+		if (err) {
+			return callback(err, null);
+		}
+		if (results[0]['COUNT(*)'] > 0) {
+			return callback(err, true);
+		} else {
+			return callback(err, false);
+		}
+	});
+}
 
 User.get = function get(username, callback) {
 	// get info of a user
-	dbConnection.connect();
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + userTable + ' (username VARCHAR(30) PRIMARY KEY, password VARCHAR(30))', function(err) {
 		if (err) {
-			dbConnection.end();
 			return callback(err);
 		}
 	});
 	query = dbConnection.query('SELECT * FROM ' + userTable + ' WHERE `username` = ?', username, function (err, results, fields) {
-		dbConnection.end();
 		if (results.length > 0) { // user exist
 			var user = new User(results[0].username, results[0].password);
 			callback(err, user);
-		}
-		else { // user not exist
+		} else { // user not exist
 			callback(err, null);
 		}
     });
@@ -72,15 +72,12 @@ User.prototype.visit = function visit(city, time, impression) {
 		       impression: impression	
 	};
 	
-	dbConnection.connect();
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
-			dbConnection.end();
 			return callback(err);
 		}
 	});
 	query = dbConnection.query('INSERT INTO ' + visitTable + ' SET ?', visit, function(err) {
-		dbConnection.end();
 		callback(err);
 	});
 };

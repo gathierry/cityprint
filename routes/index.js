@@ -1,7 +1,7 @@
 User = require('../models/user.js');
 
 var express = require('express');
-var crypto = require("crypto");
+var crypto = require('crypto');
 var router = express.Router();
 
 /* GET home page. */
@@ -25,39 +25,39 @@ router.post('/login', function(req, res, next) {
 	User.get(username, function(err, user) {
 	    if (err) {
 			throw(err);
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 	    	return res.redirect('/login');
 	    }
 		if (!user) {
 			jsonResp.errcode = 2;
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 			console.log('User not exist');
 		}
 		else if (user.password != password) {
 			jsonResp.errcode = 3;
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 			console.log('Wrong password');
 		}
 		else {
 			req.session.user = username;
 			jsonResp.errcode = 0;
-			res.json(JSON.parse(jsonResp));
-			return res.redirect('/');
+			res.json(JSON.stringify(jsonResp));
+			//return res.redirect('/');
 		}
 	});
 	
 });
 
 // check if username exist
-router.get('/reg', function(req, res, next) {
+router.get('/checkusername', function(req, res, next) {
 	var username = req.query.username;
 	var jsonResp = {username : username, errcode : 1}; // errcode 0 - not exist, 1 - db error, 2 - user exist
-	User.get(username, function(err, user) {
+	User.exist(username, function(err, exist) {
 	    if (err) {
 			throw(err);
 			res.json(JSON.stringify(jsonResp));
 	    }
-		if (!user) {
+		if (!exist) {
 			jsonResp.errcode = 0;
 			res.json(JSON.stringify(jsonResp));
 		} else {
@@ -71,22 +71,27 @@ router.post('/reg', function(req, res, next) {
     var username = req.body.username;
 	var md5 = crypto.createHash('md5');
 	var password = md5.update(req.body.password).digest('base64');
-	var newUser = new User(username, password);
+	
 	var jsonResp = {username : username, errcode : 1}; // errcode 0 - not exist, 1 - db error, 2 - user exist
-	newUser.save(function(err, userexist) {
+	User.exist(username, function(err, exist) {
 	    if (err) {
 			throw(err);
-	    	return res.redirect('/reg');
+			res.json(JSON.stringify(jsonResp));
 	    }
-		if (userexist) {
+		if (!exist) {
+			jsonResp.errcode = 0;
+			var newUser = new User(username, password);
+			newUser.save(function(err) {
+			    if (err) {
+					throw(err);
+			    	res.json(JSON.stringify(jsonResp));
+			    }
+				req.session.user = username;
+				res.json(JSON.stringify(jsonResp));
+			});
+		} else {
 			jsonResp.errcode = 2;
 			res.json(JSON.stringify(jsonResp));
-		}
-		else {
-			jsonResp.errcode = 0;
-			res.json(JSON.stringify(jsonResp));
-			req.session.user = username;
-			res.redirect('/');
 		}
 	});
 });

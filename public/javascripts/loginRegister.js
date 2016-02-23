@@ -96,16 +96,16 @@ function checkUsernameExist(){
 		return;
 	}
     
-    $.ajax({ url: "/reg",
+    $.ajax({ url: "/checkusername",
              data: {username: username},
              dataType: "json",
              type: "GET",
              success: function(message){
 				 console.log(message);
-                 if(message.usernameExist == "false" && isLoginBox){
+                 if(message.errcode == 0 && isLoginBox){
                      showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
                  }
-                 else if(message.usernameExist == "true" && !isLoginBox){
+                 else if(message.errcode == 2 && !isLoginBox){
                      showInformation(informationBar,dic["alreadyUsedUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["login"]+"</span>");
                  }
              },
@@ -161,16 +161,16 @@ function submitLogin(){
 	}
 
     $.ajax({ url: "/login",
-             data: {username: username, password: password, mode: "json"},
+             data: {username: username, password: password},
              dataType: "json",
              type: "POST",
              success: function(message){
-                if(message.usernameExist == "false"){
+                if(message.errcode == 2){
                     showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
                 }
                 else{
-                    if(message.recordExist == "false") showInformation(informationBar,dic["mismatchPassword"]);
-                    else location.href = message.url;
+                    if(message.errcode == 3) showInformation(informationBar,dic["mismatchPassword"]);
+                    else location.href = "/";
                 }
              },
              error: function(jqXHR, textStatus, errorThrown) {
@@ -207,11 +207,11 @@ function submitRegister(){
              dataType: "json",
              type: "POST",
              success: function(message){
-                if(message.usernameExist == "true"){
+                if(message.errcode == 2){
                     showInformation(informationBar,dic["alreadyUsedUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["login"]+"</span>");
                 }
                 else{
-                    location.href = message.url;
+                    location.href = "/";
                 }
              },
              error: function(jqXHR, textStatus, errorThrown) {
