@@ -96,8 +96,8 @@ function checkUsernameExist(){
 		return;
 	}
     
-    $.ajax({ url: "",
-             data: {nameExist: username, mode: "json"},
+    $.ajax({ url: "/reg",
+             data: {username: username, mode: "json"},
              dataType: "json",
              type: "GET",
              success: function(message){
@@ -160,9 +160,9 @@ function submitLogin(){
 	}
 
     $.ajax({ url: "",
-             data: {Username: username, Password: password, mode: "json"},
+             data: {username: username, password: password, mode: "json"},
              dataType: "json",
-             type: "GET",
+             type: "POST",
              success: function(message){
                 if(message.usernameExist == "false"){
                     showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
@@ -202,7 +202,7 @@ function submitRegister(){
     }
 	
     $.ajax({ url: "",
-             data: {Username: username, Password: password, mode: "json"},
+             data: {username: username, password: password, mode: "json"},
              dataType: "json",
              type: "POST",
              success: function(message){

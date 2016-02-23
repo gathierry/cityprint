@@ -14,40 +14,64 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-	res.render('login', { title: 'Login' });
+	res.render('login');
 });
 
 router.post('/login', function(req, res, next) {
-    var username = "testuser5";
+    var username = req.body.username;
 	var md5 = crypto.createHash('md5');
-	var password = md5.update("00000000").digest('base64');
+	var password = md5.update(req.body.password).digest('base64');
+	var jsonResp = {username : username, errcode : 1}; // errcode 0 - success, 1 - db error, 2 - user inexist, 3 - password incorrect
 	User.get(username, function(err, user) {
 	    if (err) {
 			throw(err);
+			res.json(JSON.parse(jsonResp));
 	    	return res.redirect('/login');
 	    }
 		if (!user) {
+			jsonResp.errcode = 2;
+			res.json(JSON.parse(jsonResp));
 			console.log('User not exist');
 			return res.redirect('/login');
 		}
 		if (user.password != password) {
+			jsonResp.errcode = 3;
+			res.json(JSON.parse(jsonResp));
 			console.log('Wrong password');
 			return res.redirect('/login');
 		}
 		req.session.user = username;
+		jsonResp.errcode = 0;
+		res.json(JSON.parse(jsonResp));
 		return res.redirect('/');
-	})
+	});
 	
 });
 
+// check if username exist
 router.get('/reg', function(req, res, next) {
-	res.render('login', { title: 'Register' });
+	var username = req.params.username;
+	var jsonResp = {username : username, errcode : 1}; // errcode 0 - not exist, 1 - db error, 2 - user exist
+	User.get(username, function(err, user) {
+	    if (err) {
+			throw(err);
+			res.json(JSON.parse(jsonResp));
+	    }
+		if (!user) {
+			jsonResp.errcode = 0;
+			res.json(JSON.parse(jsonResp));
+			console.log('User not exist');
+		} else {
+			jsonResp.errcode = 2;
+			res.json(JSON.parse(jsonResp));
+		}
+	});
 });
 
 router.post('/reg', function(req, res, next) {
-    var username = "testuser5";
+    var username = req.body.username;
 	var md5 = crypto.createHash('md5');
-	var password = md5.update("00000000").digest('base64');
+	var password = md5.update(req.body.password).digest('base64');
 	var newUser = new User(username, password);
 	newUser.save(function(err) {
 	    if (err) {
