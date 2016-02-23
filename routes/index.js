@@ -50,20 +50,20 @@ router.post('/login', function(req, res, next) {
 
 // check if username exist
 router.get('/reg', function(req, res, next) {
-	var username = req.params.username;
+	var username = req.query.username;
 	var jsonResp = {username : username, errcode : 1}; // errcode 0 - not exist, 1 - db error, 2 - user exist
 	User.get(username, function(err, user) {
 	    if (err) {
 			throw(err);
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 	    }
 		if (!user) {
 			jsonResp.errcode = 0;
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 			console.log('User not exist');
 		} else {
 			jsonResp.errcode = 2;
-			res.json(JSON.parse(jsonResp));
+			res.json(JSON.stringify(jsonResp));
 		}
 	});
 });

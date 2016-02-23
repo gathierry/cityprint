@@ -97,19 +97,20 @@ function checkUsernameExist(){
 	}
     
     $.ajax({ url: "/reg",
-             data: {username: username, mode: "json"},
+             data: {username: username},
              dataType: "json",
              type: "GET",
              success: function(message){
-                if(message.usernameExist == "false" && isLoginBox){
-                    showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
-                }
-                else if(message.usernameExist == "true" && !isLoginBox){
-                    showInformation(informationBar,dic["alreadyUsedUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["login"]+"</span>");
-                }
+				 console.log(message);
+                 if(message.usernameExist == "false" && isLoginBox){
+                     showInformation(informationBar,dic["notExistUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["goRegisterCityprint"]+"</span>");
+                 }
+                 else if(message.usernameExist == "true" && !isLoginBox){
+                     showInformation(informationBar,dic["alreadyUsedUsername"]+"<span class='hyperlink underline' onclick='switchLoginRegister()'>"+dic["login"]+"</span>");
+                 }
              },
              error: function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown + " : " + textStatus);
+                 console.log(errorThrown + " : " + textStatus);
              }
     });
 }
@@ -159,7 +160,7 @@ function submitLogin(){
 		return;
 	}
 
-    $.ajax({ url: "",
+    $.ajax({ url: "/login",
              data: {username: username, password: password, mode: "json"},
              dataType: "json",
              type: "POST",
@@ -201,7 +202,7 @@ function submitRegister(){
 		return;
     }
 	
-    $.ajax({ url: "",
+    $.ajax({ url: "/reg",
              data: {username: username, password: password, mode: "json"},
              dataType: "json",
              type: "POST",
