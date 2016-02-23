@@ -1,13 +1,42 @@
-extends layout
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title  Sign in - CityPrint 
+    link(rel='stylesheet', type='text/css', href='/stylesheets/cityprint.css')
+    script(type='text/javascript', src='https://code.jquery.com/jquery-1.12.0.min.js')
+    script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js')
+    script(type='text/javascript', src='/javascripts/loginRegister.js')
+  body
+    #login.hide
+      #main-head
+        .logo(onclick="window.location='./Cityprint.html'")
+      #main-body
+        #register-box.register-box
+          .input-box
+            input#register-username.text-input(type='text', placeholder='Username', tabindex='1', onchange='checkUsernameExist()')
+          .input-box
+            input#register-password.text-input(type='password', placeholder='Password', tabindex='2')
+          .input-box
+            input#register-password-confirm.text-input(type='password', placeholder='Confirm Password', tabindex='3')
+          .login-bind
+            button#register-btn.btn(tabindex='4', onclick='submitRegister()') Sign up
+          #register-information.information.information-hide.hide
+        #login-box.login-box.in-place.login-box-before-init
+          .input-box
+            input#login-username.text-input(type='text', placeholder='Username', tabindex='5', onchange='checkUsernameExist()')
+          .input-box
+            input#login-password.text-input(type='password', placeholder='Password', tabindex='6')
+          .login-bind
+            button#login-btn.btn(tabindex='7', onclick='submitLogin()') Sign in
+          #login-information.information.information-hide.hide
+        #slogan.slogan.slogan-in-place.not-selectable
+        #switcher.not-selectable.switcher-before-init(onclick='switchLoginRegister()')
+          #switch-arrow.switch-arrow
+          #switch-label Sign up
+      #main-footer.main-footer
+        ul#website-info
+          li © 2016 CityPrint 
+          li Li Shiyu 
+          li Zhan Yin  
 
-block content
-  h1 Log in
-  form(name="add-estimation", method="post")
-    div.input
-      span.label Username
-      input(type="text", name="username")
-    div.input
-      span.label Password
-      input(type="password", name="password")
-    div.actions
-      input(type="submit")

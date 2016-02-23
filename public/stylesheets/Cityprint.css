@@ -204,7 +204,7 @@ h6{font-size:14px;font-weight:normal}
 
 .cloud{
     text-indent:-9999px;
-    background:url(cloud.png) 0 0 no-repeat;
+    background:url(../images/cloud.png) 0 0 no-repeat;
     display:inline-block;
     width:78px;
 }
@@ -227,7 +227,7 @@ h6{font-size:14px;font-weight:normal}
     float:left;
     width:22px;
     height:16px;
-    background:url(left.png) 0 0 no-repeat;
+    background:url(../images/left.png) 0 0 no-repeat;
     -webkit-transition: -webkit-transform .6s ease;
     -moz-transition: -moz-transform .6s ease;
     -ms-transition: -ms-transform .6s ease;
@@ -242,7 +242,7 @@ h6{font-size:14px;font-weight:normal}
     -o-transform:rotate(180deg);
     transform:rotate(180deg);
     filter:FlipH;
-    *background:url(right.png) 0 0 no-repeat;
+    *background:url(../images/right.png) 0 0 no-repeat;
 }
 
 #switch-label{
@@ -356,6 +356,6 @@ html {word-break:break-all;}
     margin-left:-80px;
     height:41px;
     width:205px;
-    background: url(Cityprint.png) no-repeat;
+    background: url(../images/Cityprint.png) no-repeat;
     cursor:pointer;
 }
