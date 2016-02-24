@@ -202,7 +202,7 @@ function submitRegister(){
     }
 	
     $.ajax({ url: "/reg",
-             data: {username: username, password: password, mode: "json"},
+             data: {username: username, password: password},
              dataType: "json",
              type: "POST",
              success: function(message){

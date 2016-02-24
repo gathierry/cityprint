@@ -1,4 +1,5 @@
 User = require('../models/user.js');
+City = require('../models/city.js');
 
 var express = require('express');
 var crypto = require('crypto');
@@ -10,7 +11,32 @@ router.get('/', function(req, res, next) {
 		return res.redirect('/login');
 	}
 	// write location to database
-	res.render('index', { title: 'Cityprint', username: req.session.user });
+	res.render('map', { title: 'Cityprint', username: req.session.user });
+});
+
+router.get('/visit', function(req, res, next) {
+	var cityname = req.query.cityname;
+	var country = req.query.country;
+	var latitude = req.query.lat;
+	var longitude = req.query.lng;
+	var city = new City(cityname, country, latitude, longitude);
+	var username = req.session.user;
+	var user = new User(username, '');
+	var pathwayCid = [];
+	user.visit(city, new Date(), '', function(err, results) {
+		if (err) {
+			throw(err);
+		}
+		for (var i = 0; i < results.length; i ++) {
+			pathwayCid.push(results[i]['cid']);
+		}
+		City.get(pathwayCid, function(err, cities) {
+			if (err) {
+				throw(err);
+			}
+			res.json(cities);
+		});
+	});
 });
 
 router.get('/login', function(req, res, next) {

@@ -1,5 +1,5 @@
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 48.85, lng: 2.35},
     zoom: 6
   });
@@ -12,10 +12,9 @@ function initMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
       };
-	  
       $.ajax({ url: "https://maps.googleapis.com/maps/api/geocode/json",
 			   data: { latlng : pos.lat + "," + pos.lng, key : "AIzaSyDpf02DeUFnntIXhEw5yv5jKHKVKkPArpQ", format : "json" },                
                success: getCityInfo,
@@ -35,13 +34,37 @@ function initMap() {
 }
 
 function getCityInfo(data) {
+	var country = '';
+	var cityname = '';
+	var lat = 0.0;
+	var lng = 0.0;
 	for (var i = 0; i < data.results.length; i ++) {
 		var address = data.results[i];
+	    if (address.types[0] == "country"){
+	        country = address.address_components[0].long_name; // country name
+	    }
 	    if (address.types[0] == "locality"){
-			console.log(address);
-	        console.log(address.address_components[0].long_name); // city name
+	        cityname = address.address_components[0].long_name; // city name
+			lat = address.geometry.location.lat;
+			lng = address.geometry.location.lng;
 	    }
 	}
+    $.ajax({ url: "/visit",
+		     data: { cityname : cityname, country : country, lat : lat, lng : lng },
+	         dataType: "json",
+	         type: "GET",
+	         success: function(data) {
+				 for (var i = 0; i < data.length; i ++) {
+					 var marker = new google.maps.Marker({
+					     position: { lat: data[i].latitude, lng: data[i].longitude },
+					     map: map
+					  });
+				 }
+	         },
+             error: function(jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown + " : " + textStatus);
+             }
+    });
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {

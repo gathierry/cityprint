@@ -59,7 +59,7 @@ User.get = function get(username, callback) {
     });
 };
 
-User.prototype.visit = function visit(city, time, impression) {
+User.prototype.visit = function visit(city, time, impression, callback) {
 	city.save(function(err) {
 		if (err) {
 			throw(err);
@@ -74,10 +74,20 @@ User.prototype.visit = function visit(city, time, impression) {
 	
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
-			return callback(err);
+			return callback(err, null);
 		}
 	});
-	query = dbConnection.query('INSERT INTO ' + visitTable + ' SET ?', visit, function(err) {
-		callback(err);
+	query = dbConnection.query('INSERT IGNORE INTO ' + visitTable + ' SET ?', visit, function(err) {
+		if (err) {
+			return callback(err, null);
+		}
 	});
+	
+	query = dbConnection.query('SELECT * FROM ' + visitTable + ' WHERE `username` = ?', this.username, function (err, results, fields) {
+		if (err) {
+			return callback(err, null);
+		}
+		callback(err, results);
+    });
 };
+

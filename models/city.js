@@ -20,37 +20,28 @@ City.prototype.save = function save(callback) {
 		       longitude: this.longitude,
 		             cid: this.cid
 	};
-	dbConnection.connect();
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + cityTable + ' (cid VARCHAR(30) PRIMARY KEY, cityname VARCHAR(30), country VARCHAR(30), latitude FLOAT, longitude FLOAT)', function(err) {
 		if (err) {
-			dbConnection.end();
 			return callback(err);
 		}
 	});
-	query = dbConnection.query('INSERT INTO ' + cityTable + ' SET ?', city, function(err) {
-		dbConnection.end();
+	
+	dbConnection.query('INSERT IGNORE INTO ' + cityTable + ' SET ?', city, function(err) {
 		callback(err);
 	});
 };
 
-City.get = function get(cid, callback) {
+City.get = function get(cids, callback) {
 	// get info of a user
-	dbConnection.connect();
 	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + cityTable + ' (cid VARCHAR(30) PRIMARY KEY, cityname VARCHAR(30), country VARCHAR(30), latitude FLOAT, longitude FLOAT)', function(err) {
 		if (err) {
-			dbConnection.end();
 			return callback(err);
 		}
 	});
-	query = dbConnection.query('SELECT * FROM ' + cityTable + ' WHERE `cid` = ?', cid, function (err, results, fields) {
-		dbConnection.end();
-		if (results.length > 0) { // city exist
-			var city = new City(results[0].cityname, results[0].country, results[0].latitude, results[0].longitude);
-			callback(err, city);
+	query = dbConnection.query('SELECT * FROM ' + cityTable + ' WHERE `cid` in (?)', [cids], function (err, results, fields) {
+		if (err) {
+			return callback(err);
 		}
-		else { // city not exist
-			callback(err, null);
-		}
+		callback(err, results);
     });
 };
-
