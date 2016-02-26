@@ -7,9 +7,15 @@ h4{font-size:18px;line-height:30px;font-weight:normal}
 h5{font-size:16px;font-weight:normal}
 h6{font-size:14px;font-weight:normal}
 
-.small-screen #main-body{ height:300px; }
-.normal-screen #main-body{ height:360px; }
-.large-screen #main-body{ height:420px; }
+.small-screen #main-body{ height:320px; }
+.normal-screen #main-body{ height:380px; }
+.large-screen #main-body{ height:440px; }
+.small-screen #main-head{ height:100px; }
+.normal-screen #main-head{ height:120px; }
+.large-screen #main-head{ height:140px; }
+.small-screen .logo{ top:25px; }
+.normal-screen .logo{ top:35px; }
+.large-screen .logo{ top:45px; }
 
 .hide{ display:none; }
 
@@ -342,13 +348,6 @@ html {word-break:break-all;}
     -ms-user-select: none;
     user-select: none;
 }
-
-.small-screen #main-head{ height:100px; }
-.normal-screen #main-head{ height:120px; }
-.large-screen #main-head{ height:140px; }
-.small-screen .logo{ top:25px; }
-.normal-screen .logo{ top:35px; }
-.large-screen .logo{ top:45px; }
 
 .logo {
     position:absolute;

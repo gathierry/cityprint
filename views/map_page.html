@@ -1,17 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Welcome | CityPrint</title>
-	<style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
-      #map { height: 100%; }
-    </style>
+    
+    <link href="../public/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="../public/stylesheets/map.css" rel="stylesheet">
+    
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="../public/javascripts/map.js"></script>
   </head>
   <body>
-    <div id="map"></div>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="./Cityprint.html">Sign out</a></li>
+          </ul>
+        </nav>
+        <div class="logo" onclick="window.location='./map_page.html'"></div>
+      </div>
+
+      <div id="map" class="cityprintmap"></div>
+
+      <div class="row marketing">
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <div id="meteo-information" class="caption">
+              <h3>Meteo</h3>
+              <img id="meteo-image" src="" alt="">
+              <p></p>
+              <table></table>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xs-6 col-md-4">
+          <a class="thumbnail" href="#">
+            <img id="city-image" src="" alt="">
+          </a>
+        </div>
+        
+        <div class="col-sm-6 col-md-5">
+          <div class="thumbnail">
+            <img src="" alt="">
+            <div id="city-information" class="caption">
+              <h3></h3>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer class="footer">
+        <p>&copy; 2016 CityPrint | Li Shiyu | Zhan Yin </p>
+      </footer>
+
+    </div>
+    
 	<script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEEzV_6S-FKNCUduQDJTd9LKdQIViEXgM&callback=initMap">
 	</script>

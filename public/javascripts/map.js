@@ -71,6 +71,8 @@ function getCityInfo(data) {
 	        cityname = address.address_components[0].long_name; // city name
 			lat = address.geometry.location.lat;
 			lng = address.geometry.location.lng;
+            
+            showMeteo(cityname);
 	    }
 	}
     $.ajax({ url: "/visit",
@@ -89,6 +91,26 @@ function getCityInfo(data) {
 	         },
              error: function(jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown + " : " + textStatus);
+             }
+    });
+}
+
+function showMeteo(cityname) {
+    $.ajax({ url: "http://api.openweathermap.org/data/2.5/weather",
+             data: { q: cityname, appid: "f71402678b528d66222aabe9e51cb1c5", lang: "en", mode: "jsonp" },
+             dataType: "jsonp",
+             success: function(city){
+                $("#meteo-image").attr("src", "http://openweathermap.org/img/w/" + city.weather[0].icon + ".png");
+	            $("#meteo-information p").html(city.weather[0].description);
+                $("#meteo-information table").attr("border", "1");
+                var tablecontent = '<tr><th rowspan="2">Wind</th><th>speed</th><td>' + city.wind.speed + '</td></tr>';
+                tablecontent += '<tr><th>degree</th><td>' + city.wind.deg + '</td></tr>';
+                tablecontent += '<tr><th colspan="2">Pressure</th><td>' + city.main.pressure + '</td></tr>';
+                tablecontent += '<tr><th colspan="2">Humidity</th><td>' + city.main.humidity + '</td></tr>';
+                $("#meteo-information table").html(tablecontent);
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+                 console.log(errorThrown + " : " + textStatus);
              }
     });
 }
