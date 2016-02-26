@@ -11,10 +11,34 @@ function initMap() {
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+      
+	  var pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
       };
+	  // Test data
+	  /*
+	  var pos = { // Paris
+          lat: 48.860896,
+          lng: 2.318229
+	  }
+	  var pos = { // Brest
+          lat: 48.386503,
+          lng: -4.527755
+	  }
+	  var pos = { // Mountain View
+          lat: 37.402863,
+          lng: -122.087074
+	  }
+	  var pos = { // Beijing
+          lat: 39.902737,
+          lng: 116.323264
+	  }
+	  var pos = { // Xinjiang
+	      lat: 38.316650,
+	      lng: 86.260770
+	  }
+	  */
       $.ajax({ url: "https://maps.googleapis.com/maps/api/geocode/json",
 			   data: { latlng : pos.lat + "," + pos.lng, key : "AIzaSyDpf02DeUFnntIXhEw5yv5jKHKVKkPArpQ", format : "json" },                
                success: getCityInfo,
@@ -54,9 +78,11 @@ function getCityInfo(data) {
 	         dataType: "json",
 	         type: "GET",
 	         success: function(data) {
-				 for (var i = 0; i < data.length; i ++) {
+				 console.log(data.extract);
+				 console.log(data.img);
+				 for (var i = 0; i < data.pathway.length; i ++) {
 					 var marker = new google.maps.Marker({
-					     position: { lat: data[i].latitude, lng: data[i].longitude },
+					     position: { lat: data.pathway[i].latitude, lng: data.pathway[i].longitude },
 					     map: map
 					  });
 				 }

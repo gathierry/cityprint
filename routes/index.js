@@ -3,6 +3,7 @@ City = require('../models/city.js');
 
 var express = require('express');
 var crypto = require('crypto');
+var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
@@ -34,7 +35,27 @@ router.get('/visit', function(req, res, next) {
 			if (err) {
 				throw(err);
 			}
-			res.json(cities);
+			request('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' + cityname, 
+			function (err, resp1, body1) {
+				var cityExtract = '';
+			    if (!err && resp1.statusCode == 200) {
+				    var pageid = Object.keys(JSON.parse(body1).query.pages)[0];
+					if (typeof JSON.parse(body1).query.pages[pageid].extract != "undefined") {
+						cityExtract = JSON.parse(body1).query.pages[pageid].extract;
+					}
+			    }
+  			    request('http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=200&titles=' + cityname, 
+  			    function (err, resp2, body2) {
+					var imgLink = '';
+  			        if (!err && resp2.statusCode == 200) {
+  				        var pageid = Object.keys(JSON.parse(body2).query.pages)[0]
+						if (typeof JSON.parse(body2).query.pages[pageid].thumbnail != "undefined") {
+							imgLink = JSON.parse(body2).query.pages[pageid].thumbnail.source;
+						}
+  			        }
+			        res.json({pathway : cities, extract : cityExtract, img : imgLink});
+  			    });
+			});
 		});
 	});
 });
