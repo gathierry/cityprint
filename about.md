@@ -43,7 +43,25 @@ Il y a 3 tables dans la base de donnée : ```User```, ```City``` et ```Visit``` 
 
 ## Web pages
 
+### Log in page
 
+![](public/images/about_login.png)
+
+C'est la page pour se connecter. Le champs de nom d'utilisateur peut détecter si le nom existe déjà dans la base de donnée tant que l'entrée est terminée.
+
+La couleur au fond se change chaque seconde.
+
+### Sign up page
+
+![](public/images/about_signup.png)
+
+De même, on peut aussi tester si le nom d'utilisateur est valide ou pas juste après l'entrée. D'ailleurs, on détecte si les 2 mots de passe sont exactement pareils. Dans cette figure, le nom ```testuser``` est déjà utilisé par d'autres, donc on a une remarque au-dessus du formulaire.
+
+### Page principale
+
+![](public/images/about_map.png)
+
+Cette page contient une carte dans laquelle toutes les villes visitées sont indiquées. Etant donnée la location actuelle, la météo est une petite introduction sont présentés au milieu de la page. Les commentaires plus récents sont affichés à la fin. On peut commenter et renouveler son ancien commentaire.
 
 ## Routière de serveur
 

@@ -99,11 +99,10 @@ User.prototype.updateImpression = function updateImpression(cid, imptime, impres
 		if (err) {
 			return callback(err, null);
 		}
-		dbConnection.query('UPDATE ' + visitTable + ' SET `impression`=? WHERE `username`=? and`cid`=?', [impression, username, cid], function(err) {
+		dbConnection.query('UPDATE ' + visitTable + ' SET `impression`=?, `imptime`=? WHERE `username`=? and`cid`=?', [impression, imptime, username, cid], function(err) {
 			if (err) {
 				return callback(err, null);
 			}
-			console.log(impression);
 			return callback(err);
 		});
 	});

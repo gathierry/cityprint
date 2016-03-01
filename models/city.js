@@ -57,7 +57,7 @@ City.prototype.getImpressions = function getImpressions(username, callback) {
 		if (err) {
 			return callback(err, null);
 		}
-		dbConnection.query('SELECT username, impression, imptime FROM ' + visitTable + ' WHERE `cid` = ? AND LENGTH(impression)>0 AND `username` <> ? ORDER BY imptime LIMIT 3', [cid, username], function (err, results2) {
+		dbConnection.query('SELECT username, impression, imptime FROM ' + visitTable + ' WHERE `cid` = ? AND LENGTH(impression)>0 AND `username` != ? ORDER BY imptime LIMIT 3', [cid, username], function (err, results2) {
 			if (err) {
 				return callback(err);
 			}
