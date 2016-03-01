@@ -110,13 +110,13 @@ function getCityInfo(data) {
                  $("#city-information-content").html(info);
                  $("#city-information-title").html(cityname);
                  
-                 var citypercent = data.pathway.nbCity*100/400;
+                 var citypercent = (data.pathway.nbCity*100/2000000).toFixed(2);
                  $("#city-percent").attr("aria-valuenow", citypercent);
                  $("#city-percent").attr("style", "min-width: 2em; width: "+citypercent+"%;");
                  $("#city-percent").html(citypercent+"%");
                  $("#city-percent-info").html("You have travelled in "+data.pathway.nbCity+" different cities.");
                  
-                 var countrypercent = data.pathway.nbCountry*100/200;
+                 var countrypercent = (data.pathway.nbCountry*100/195).toFixed(2);
                  $("#country-percent").attr("aria-valuenow", countrypercent);
                  $("#country-percent").attr("style", "min-width: 2em; width: "+countrypercent+"%;");
                  $("#country-percent").html(countrypercent+"%");
