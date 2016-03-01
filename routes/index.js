@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 		return res.redirect('/login');
 	}
 	// write location to database
-	res.render('map', { title: 'Cityprint', username: req.session.user });
+	res.render('map', { title: 'Welcome | CityPrint', username: req.session.user });
 });
 
 router.get('/visit', function(req, res, next) {
@@ -169,6 +169,11 @@ router.post('/reg', function(req, res, next) {
 		}
 	});
 });
+
+router.get('/about', function(req, res, next) {
+	res.render('about', { title: 'About | CityPrint'});
+});
+
 
 router.get('/logout', function(req, res, next) {
 	req.session.user = null;

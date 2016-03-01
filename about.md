@@ -1,7 +1,16 @@
+# A propos de Cityprint
 
+## Introduction
 
+## Techniques utilisés
 
-## Data Model
+- HTML, CSS, Javascript
+- Node.js
+- MySQL
+
+## Modèle de donnée
+
+Il y a 3 tables dans la base de donnée : ```User```, ```City``` et ```Visit``` comme ceux qui sont montrés ci-dessous. Les clés en gras sont primaires.
 
 |User|
 |----|
@@ -23,3 +32,10 @@
 |time|
 |impression|
 |imptime|
+
+## Resource extérieure
+- Google Map API
+- Google Map Geocoding API
+- OpenWeatherMap API
+- Openshift Plateform
+- Bootstrap

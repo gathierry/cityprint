@@ -8,7 +8,7 @@ Pour tester sur votre PC, il faut
 - configurer MySQL avec ```username:root``` et ```password:sqlpass```
 - executer ```node server.js```
 
-Le site sera disponible à ```localhost:8080```
+Le site sera disponible à ```localhost:8080```, *Chrome* est recommandé pour faire des tests. Il faut autoriser le navigateur d'accéder à votre coordonnée.
 
 Vous pouvez aussi visiter [le site deployé en openshift](http://cityprint-thierry.rhcloud.com). Comme il faut se connecter pour voir plus de fonction, on vous donne un compte pour tester : ```username:testuser``` et ```password:11111111```
 
