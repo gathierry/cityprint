@@ -39,6 +39,10 @@ router.get('/visit', function(req, res, next) {
 			var nbCountry = country[0]['COUNT(DISTINCT country)'];
 			var nbCity = cities.length;
 			city.getImpressions(username, function(err, imps) {
+				var impressions = [];
+				for (var i = 0; i < imps.length; i ++) {
+				    impressions.push({username : imps[i]['username'], impression : imps[i]['impression']});
+				}
 				request('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' + cityname, 
 				function (err, resp1, body1) {
 					var cityExtract = '';
@@ -58,8 +62,8 @@ router.get('/visit', function(req, res, next) {
 							}
 	  			        }
 						var pathway = {cities : cities, nbCountry : nbCountry, nbCity : nbCity};
-						console.log({pathway : pathway, extract : cityExtract, img : imgLink, impression : imps});
-				        res.json({pathway : pathway, extract : cityExtract, img : imgLink, impression : imps});
+						console.log({pathway : pathway, extract : cityExtract, img : imgLink, impression : impressions});
+				        res.json({pathway : pathway, extract : cityExtract, img : imgLink, impression : impressions});
 	  			    });
 				});
 			});
