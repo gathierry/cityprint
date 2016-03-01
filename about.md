@@ -14,6 +14,8 @@ Cityprint fournit aussi les informations pratiques telles que l'introduction et 
 
 Cette application peut être séparée en 3 parties : client, serveur et base de donnée.
 
+![](public/images/about_uml.png)
+
 ## Techniques utilisés
 
 - HTML, CSS, Javascript, JQuery, AJAX, JSON

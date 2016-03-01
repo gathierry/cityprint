@@ -423,6 +423,12 @@ html
       }
   body
     h1#toc_0 A propos de Cityprint
+    p
+      em LI Shiyu
+      |  and 
+      em ZHAN Yin
+    p
+      img(src='images/favicon.png', alt='')
     h2#toc_1 Introduction
     p
       | Cityprint est une web application qui on permet de noter les villes que l'on a visitées. Après s'est connecté, l'applications peut détecter la coordonnée d'utilisateur et la sauvegarder automatiquement dans le serveur. Avec Cityprint, on peut voir nos parcours dans le monde et on est encouragé à explorer le territoire inconnu.
@@ -431,6 +437,8 @@ html
     h2#toc_2 Diagrammes de séquences
     p
       | Cette application peut être séparée en 3 parties : client, serveur et base de donnée.
+    p
+      img(src='images/about_uml.png', alt='')
     h2#toc_3 Techniques utilisés
     ul
       li HTML, CSS, Javascript, JQuery, AJAX, JSON
@@ -492,20 +500,20 @@ html
     h2#toc_5 Web pages
     h3#toc_6 Log in page
     p
-      img(src='/images/about_login.png', alt='')
+      img(src='images/about_login.png', alt='')
     p
       | C'est la page pour se connecter. Le champs de nom d'utilisateur peut détecter si le nom existe déjà dans la base de donnée tant que l'entrée est terminée.
     p La couleur au fond se change chaque seconde.
     h3#toc_7 Sign up page
     p
-      img(src='/images/about_signup.png', alt='')
+      img(src='images/about_signup.png', alt='')
     p
       | De même, on peut aussi tester si le nom d'utilisateur est valide ou pas juste après l'entrée. D'ailleurs, on détecte si les 2 mots de passe sont exactement pareils. Dans cette figure, le nom 
       code testuser
       |  est déjà utilisé par d'autres, donc on a une remarque au-dessus du formulaire.
     h3#toc_8 Page principale
     p
-      img(src='/images/about_map.png', alt='')
+      img(src='images/about_map.png', alt='')
     p
       | Cette page contient une carte dans laquelle toutes les villes visitées sont indiquées. Etant donnée la location actuelle, la météo est une petite introduction sont présentés au milieu de la page. Les commentaires plus récents sont affichés à la fin. On peut commenter et renouveler son ancien commentaire.
     h2#toc_9 Routière de serveur
@@ -524,7 +532,12 @@ html
       li '/reg' : registrer nouveau utilisateur
       li '/login' : se connecter
       li '/impression' : commenter en une ville
-    h2#toc_12 Ressources extérieures
+    h2#toc_12 Déploîment
+    p
+      | Cette application est déployée sur 
+      a(href='http://cityprint-thierry.rhcloud.com/') Openshift plate-form
+      | .
+    h2#toc_13 Ressources extérieures
     p Cityprint est enforci par les ressource extérieures. 
     p
       | La carte est fournie par Google Map et les informations de ville sont alimentées par Google Map Geocoding et Wikipedia. La météo vient d'OpenWeatherMap. Bootstrap, un magnifique cadre de front-end nous donne les composants jolies et intéressantes. PaaS de Openshift nous permet de déployer l'application en ligne.
