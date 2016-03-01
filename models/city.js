@@ -33,7 +33,7 @@ City.prototype.save = function save(callback) {
 
 City.get = function get(cids, callback) {
 	// get info of a user
-	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + cityTable + ' (cid VARCHAR(30) PRIMARY KEY, cityname VARCHAR(30), country VARCHAR(30), latitude FLOAT, longitude FLOAT)', function(err) {
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + cityTable + ' (cid VARCHAR(30) PRIMARY KEY, cityname VARCHAR(30), country VARCHAR(3), latitude FLOAT, longitude FLOAT)', function(err) {
 		if (err) {
 			return callback(err);
 		}
@@ -53,7 +53,7 @@ City.get = function get(cids, callback) {
 
 City.prototype.getImpressions = function getImpressions(username, callback) {
 	var cid = this.cid;
-	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), imptime DATE, PRIMARY KEY (username, cid))', function(err) {
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression TEXT, imptime DATE, PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
 			return callback(err, null);
 		}

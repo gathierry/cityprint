@@ -62,7 +62,6 @@ router.get('/visit', function(req, res, next) {
 							}
 	  			        }
 						var pathway = {cities : cities, nbCountry : nbCountry, nbCity : nbCity};
-						console.log({pathway : pathway, extract : cityExtract, img : imgLink, impression : impressions});
 				        res.json({pathway : pathway, extract : cityExtract, img : imgLink, impression : impressions});
 	  			    });
 				});

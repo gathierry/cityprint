@@ -16,6 +16,9 @@ h6{font-size:14px;font-weight:normal}
 .small-screen .logo{ top:25px; }
 .normal-screen .logo{ top:35px; }
 .large-screen .logo{ top:45px; }
+.small-screen .rapport{ top:20px; }
+.normal-screen .rapport{ top:30px; }
+.large-screen .rapport{ top:40px; }
 
 .hide{ display:none; }
 
@@ -356,5 +359,14 @@ html {word-break:break-all;}
     height:41px;
     width:205px;
     background: url(../images/cityprint.png) no-repeat;
+    cursor:pointer;
+}
+
+.rapport {
+    position:absolute;
+    left:80%;
+    margin-right:-80px;
+    height:41px;
+    width:205px;
     cursor:pointer;
 }

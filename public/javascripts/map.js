@@ -127,8 +127,9 @@ function getCityInfo(data) {
                      $("#personalcomment").html('<div class="alert alert-info" role="alert">Leave your footprint here!</div>');
                  }
                  else {
-                     $("#personalcomment").html("<dl class='dl-horizontal'><dt>" + data.impression[0].username + "</dt><dd>" + data.impression[0].impression + "</dd></dl>");  
-                 }
+                     //$("#personalcomment").html("<dl class='dl-horizontal'><dt>" + data.impression[0].username + "</dt><dd>" + data.impression[0].impression + "</dd></dl>");  
+                     $("#personalcomment").html("<blockquote><p>" + data.impression[0].impression + "</p><footer>" + "You" + "</footer></blockquote>"); 
+				 }
                  $("#comments").html("");
                  for(var i=data.impression.length-1; i>data.impression.length-4; i--){
                     var commentbefore = $("#comments").html();
@@ -172,4 +173,46 @@ function handleLocationError(browserHasGeolocation, pos) {
 
 function handleGeocodingError() {
 	console.log("Geocoding ajax failed");
+}
+
+function addComment(){
+    $("#comment-body").val("");
+    $("#comment-block").removeAttr("style");
+    $("#comment-btn").attr("disabled", "disabled");
+    $("#add-comment").attr("style", "display: none;");
+}
+
+function cancelComment(){
+    $("#add-comment").removeAttr("style");
+    $("#comment-body").val("");
+    $("#comment-block").attr("style", "display: none;");
+}
+
+function judgeComment(){
+    var comment = $("#comment-body").val();
+    if(hasContent(comment)) $("#comment-btn").removeAttr("disabled");
+    else $("#comment-btn").attr("disabled", "disabled");
+}
+
+function submitComment(){
+	var comment = $("#comment-body").val();
+    $.ajax({ url: "/impression",
+             data: {impression: comment},
+             dataType: "json",
+             type: "POST",
+             success: function(message){
+                $("#comment-body").val("");
+                $("#comment-btn").attr("disabled", "disabled");
+                $("#personalcomment").html("<blockquote><p>" + comment + "</p><footer>" + "You" + "</footer></blockquote>"); 
+             },
+             error: function(jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown + " : " + textStatus);
+             }
+    });
+}
+
+function hasContent(content){
+	if(content.replace(/^\s+|\s+$/g,"")=='')
+		return false;
+	return true;
 }

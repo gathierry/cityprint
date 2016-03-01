@@ -75,7 +75,7 @@ User.prototype.visit = function visit(city, time, impression, callback) {
 	};
 	var username = this.username;
 	
-	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), imptime DATE, PRIMARY KEY (username, cid))', function(err) {
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression TEXT, imptime DATE, PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
 			return callback(err, null);
 		}
@@ -95,7 +95,7 @@ User.prototype.visit = function visit(city, time, impression, callback) {
 
 User.prototype.updateImpression = function updateImpression(cid, imptime, impression, callback) {
 	var username = this.username;
-	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), imptime DATE, PRIMARY KEY (username, cid))', function(err) {
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression TEXT, imptime DATE, PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
 			return callback(err, null);
 		}
@@ -103,6 +103,7 @@ User.prototype.updateImpression = function updateImpression(cid, imptime, impres
 			if (err) {
 				return callback(err, null);
 			}
+			console.log(impression);
 			return callback(err);
 		});
 	});
