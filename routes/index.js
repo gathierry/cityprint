@@ -48,7 +48,7 @@ router.get('/visit', function(req, res, next) {
 							cityExtract = JSON.parse(body1).query.pages[pageid].extract;
 						}
 				    }
-	  			    request('http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=200&titles=' + cityname, 
+	  			    request('http://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&pithumbsize=330&titles=' + cityname, 
 	  			    function (err, resp2, body2) {
 						var imgLink = '';
 	  			        if (!err && resp2.statusCode == 200) {
