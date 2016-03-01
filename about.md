@@ -1,5 +1,9 @@
 # A propos de Cityprint
 
+*LI Shiyu* and *ZHAN Yin*
+
+![](public/images/favicon.png)
+
 ## Introduction
 
 Cityprint est une web application qui on permet de noter les villes que l'on a visitées. Après s'est connecté, l'applications peut détecter la coordonnée d'utilisateur et la sauvegarder automatiquement dans le serveur. Avec Cityprint, on peut voir nos parcours dans le monde et on est encouragé à explorer le territoire inconnu.
@@ -79,6 +83,10 @@ Cette page contient une carte dans laquelle toutes les villes visitées sont ind
 - '/reg' : registrer nouveau utilisateur
 - '/login' : se connecter
 - '/impression' : commenter en une ville
+
+## Déploîment
+
+Cette application est déployée sur [Openshift plate-form](http://cityprint-thierry.rhcloud.com/).
 
 ## Ressources extérieures
 

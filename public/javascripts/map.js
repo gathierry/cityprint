@@ -85,7 +85,6 @@ function getCityInfo(data) {
 	         dataType: "json",
 	         type: "GET",
 	         success: function(data) {
-				 console.log(data);
 				 var markImg = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 				 for (var i = 0; i < data.pathway.cities.length; i ++) {
 					 var marker = new google.maps.Marker({
@@ -123,7 +122,7 @@ function getCityInfo(data) {
                  $("#country-percent").html(countrypercent+"%");
                  $("#country-percent-info").html("You have travelled in "+data.pathway.nbCountry+" different countries.");
                  
-                 if(data.impression[0].length==0) {
+                 if(data.impression[0].impression.length==0) {
                      $("#personalcomment").html('<div class="alert alert-info" role="alert">Leave your footprint here!</div>');
                  }
                  else {
@@ -131,7 +130,7 @@ function getCityInfo(data) {
                      $("#personalcomment").html("<blockquote><p>" + data.impression[0].impression + "</p><footer>" + "You" + "</footer></blockquote>"); 
 				 }
                  $("#comments").html("");
-                 for(var i=data.impression.length-1; i>data.impression.length-4; i--){
+                 for(var i = 1; i<data.impression.length; i++){
                     var commentbefore = $("#comments").html();
                     $("#comments").html(commentbefore + "<blockquote><p>" + data.impression[i].impression + "</p><footer>" + data.impression[i].username + "</footer></blockquote>"); 
                  }
