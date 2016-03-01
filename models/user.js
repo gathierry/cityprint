@@ -19,14 +19,15 @@ User.prototype.save = function save(callback) {
 		if (err) {
 			return callback(err);
 		}
+		dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
+			if (err) {
+				return callback(err);
+			} else {
+				callback(err);
+			}
+		});
 	});
-	query = dbConnection.query('INSERT INTO ' + userTable + ' SET ?', user, function(err) {
-		if (err) {
-			return callback(err);
-		} else {
-			callback(err);
-		}
-	});
+	
 };
 
 User.exist = function exist(username, callback) {
@@ -48,15 +49,15 @@ User.get = function get(username, callback) {
 		if (err) {
 			return callback(err);
 		}
+		dbConnection.query('SELECT * FROM ' + userTable + ' WHERE `username` = ?', username, function (err, results, fields) {
+			if (results.length > 0) { // user exist
+				var user = new User(results[0].username, results[0].password);
+				callback(err, user);
+			} else { // user not exist
+				callback(err, null);
+			}
+	    });
 	});
-	query = dbConnection.query('SELECT * FROM ' + userTable + ' WHERE `username` = ?', username, function (err, results, fields) {
-		if (results.length > 0) { // user exist
-			var user = new User(results[0].username, results[0].password);
-			callback(err, user);
-		} else { // user not exist
-			callback(err, null);
-		}
-    });
 };
 
 User.prototype.visit = function visit(city, time, impression, callback) {
@@ -69,25 +70,26 @@ User.prototype.visit = function visit(city, time, impression, callback) {
 	var visit = {username: this.username,
 		              cid: city.cid,
 		             time: time,
-		       impression: impression	
+		       impression: impression,
+		          imptime: time
 	};
+	var username = this.username;
 	
-	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), PRIMARY KEY (username, cid))', function(err) {
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), imptime DATE, PRIMARY KEY (username, cid))', function(err) {
 		if (err) {
 			return callback(err, null);
 		}
+		dbConnection.query('INSERT IGNORE INTO ' + visitTable + ' SET ?', visit, function(err) {
+			if (err) {
+				return callback(err, null);
+			}
+			dbConnection.query('SELECT * FROM ' + visitTable + ' WHERE `username` = ?', username, function (err, results) {
+				if (err) {
+					return callback(err, null);
+				}
+				callback(err, results);
+		    });
+		});
 	});
-	query = dbConnection.query('INSERT IGNORE INTO ' + visitTable + ' SET ?', visit, function(err) {
-		if (err) {
-			return callback(err, null);
-		}
-	});
-	
-	query = dbConnection.query('SELECT * FROM ' + visitTable + ' WHERE `username` = ?', this.username, function (err, results, fields) {
-		if (err) {
-			return callback(err, null);
-		}
-		callback(err, results);
-    });
 };
 
