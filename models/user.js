@@ -93,3 +93,18 @@ User.prototype.visit = function visit(city, time, impression, callback) {
 	});
 };
 
+User.prototype.updateImpression = function updateImpression(cid, imptime, impression, callback) {
+	var username = this.username;
+	var query = dbConnection.query('CREATE TABLE IF NOT EXISTS ' + visitTable + ' (username VARCHAR(30), cid VARCHAR(30), time DATE, impression VARCHAR(30), imptime DATE, PRIMARY KEY (username, cid))', function(err) {
+		if (err) {
+			return callback(err, null);
+		}
+		dbConnection.query('UPDATE ' + visitTable + ' SET `impression`=? WHERE `username`=? and`cid`=?', [impression, username, cid], function(err) {
+			if (err) {
+				return callback(err, null);
+			}
+			return callback(err);
+		});
+	});
+};
+

@@ -20,6 +20,7 @@ router.get('/visit', function(req, res, next) {
 	var country = req.query.country;
 	var latitude = req.query.lat;
 	var longitude = req.query.lng;
+	req.session.cid = latitude + ',' + longitude;
 	var city = new City(cityname, country, latitude, longitude);
 	var username = req.session.user;
 	var user = new User(username, '');
@@ -63,6 +64,22 @@ router.get('/visit', function(req, res, next) {
 				});
 			});
 		});
+	});
+});
+
+router.post('/impression', function(req, res, next) {
+	var username = req.session.user;
+	var cid = req.session.cid;
+	var impression = req.body.impression;
+	var user = new User(username, '');
+	user.updateImpression(cid, new Date(), impression, function(err) {
+	    if (err) {
+			throw(err);
+			res.json({errcode : 1});
+	    }
+		else {
+			res.json({errcode : 0});
+		}
 	});
 });
 
